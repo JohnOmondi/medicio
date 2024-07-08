@@ -1,5 +1,5 @@
-from django.shortcuts import render
-
+from django.shortcuts import render,redirect
+from runserver.models import Contacts
 # Create your views here.
 def index(request):
    return render(request,'index.html')
@@ -16,3 +16,11 @@ def doctors(request):
 
 def department(request):
     return render(request,'department.html')
+
+def contact(request):
+    if request.method == 'POST':
+        all = Contacts(name=request.POST['name'],email=request.POST['email'],phone=request.POST['phone'],message=request.POST['message'])
+        all.save()
+        return redirect('/contact')
+    else:
+        return render(request,'Contact.html')

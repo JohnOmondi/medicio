@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from runserver.models import Product
+from runserver.models import Product,Branch,Contacts
 
 
 
@@ -8,6 +8,8 @@ from runserver.models import Product
 
 
 admin.site.register(Product)
+admin.site.register(Branch)
+admin.site.register(Contacts)
 
 
 
