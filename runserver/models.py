@@ -43,7 +43,10 @@ class appointment(models.Model):
     def __str__(self):
         return self.name
 
-
+class Members(models.Model):
+    name = models.CharField(max_length=200)
+    username = models.CharField(max_length=200)
+    password = models.CharField(max_length=200)
 
 
 

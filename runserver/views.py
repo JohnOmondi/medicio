@@ -1,9 +1,30 @@
 from django.shortcuts import render,redirect
-from runserver.models import Contacts,appointment
+from runserver.models import Contacts,appointment,Members
 from runserver.forms import appointmentForm
 # Create your views here.
 def index(request):
-   return render(request,'index.html')
+    if request.method == 'POST':
+        if Members.objects.filter(username=request.POST['username'],
+                                  password=request.POST['password']
+
+
+            ).exists():
+            members = Members.objects.get(username=request.POST['username'],
+                                         password=request.POST['password'])
+            return  render(request,'index.html',{'members':members})
+        else:
+             return  render(request,'login.html')
+    else:
+        return render(request,'login.html')
+
+
+
+
+
+
+
+
+
 
 def inner(request):
     return render(request,'inner-page.html')
@@ -78,7 +99,15 @@ def update(request,id):
 
 
 def register(request):
-   return render(request,'register.html')
+    if request.method == 'POST':
+        members=Members(name=request.POST['name'],
+                        username=request.POST['username'],
+                        password=request.POST['password'],)
+
+        members.save()
+        return redirect('/login')
+    else:
+        return  render(request,'register.html')
 
 
 def login(request):
